@@ -1,3 +1,5 @@
+package codility;
+
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -31,11 +33,13 @@ public class BinaryGap {
         String s = Integer.toBinaryString(N);
 
         String[] split = s.split("\\w10+1");
-        return Stream.of(split).mapToInt(String::length).max().orElse(0);
+        System.out.println(s);
+        System.out.println(Arrays.toString(split));
+        return Stream.of(split).filter(ss -> ss.startsWith("1") && ss.endsWith("1")).map(ss -> ss.replace("1", "")).mapToInt(String::length).max().orElse(0);
     }
 
     public static void main(String[] args) {
-        System.out.println(solution(32));
-        System.out.println(solution2(32));
+//        System.out.println(solution(32));
+        System.out.println(solution2(1223445));
     }
 }

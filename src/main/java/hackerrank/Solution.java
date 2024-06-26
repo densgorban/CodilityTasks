@@ -1,6 +1,7 @@
 package hackerrank;
 
 import java.io.*;
+import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.joining;
 
@@ -14,18 +15,13 @@ class Result {
      */
 
     public static void fizzBuzz(int n) {
-        for (int i = 1; i <= n; i++) {
+        IntStream.rangeClosed(1 , n).forEach( i -> {
             String result = "";
-
             if( i%3 == 0) result += "Fizz";
             if( i%5 == 0) result += "Buzz";
             if (result.isEmpty()) result = "" + i;
-
             System.out.println(result);
-
-        }
-
-
+        });
     }
 
 }

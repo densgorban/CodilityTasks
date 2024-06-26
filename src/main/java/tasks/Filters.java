@@ -1,4 +1,4 @@
-package InterviewTask;
+package tasks;
 
 import java.util.*;
 import java.util.function.Predicate;
