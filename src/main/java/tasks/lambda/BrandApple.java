@@ -1,17 +1,15 @@
 package tasks.lambda;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
 @AllArgsConstructor
 @ToString
-class Apple {
+public class BrandApple {
 
-    private String color;
-    private float weight;
+    private Apple apple;
+    private String brand;
 
 }
-

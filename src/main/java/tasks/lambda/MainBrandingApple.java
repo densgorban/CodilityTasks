@@ -3,7 +3,7 @@ package tasks.lambda;
 import java.util.Arrays;
 import java.util.List;
 
-public class Main {
+public class MainBrandingApple {
 
     public static void main(String[] args) {
         List<Apple> apples = Arrays.asList(
@@ -12,8 +12,10 @@ public class Main {
                 new Apple("yellow", 300)
                 );
 
-        new AppleBox().printApple(apples, a -> !a.getColor().equals("green"));
-    }
+        BrandingApple<Apple, BrandApple> sunflowerBranding = a -> new BrandApple(a, "sunflower");
 
+        List<BrandApple> brandApples = new AppleBox().brandApple(apples, sunflowerBranding);
+        System.out.println(brandApples);
+    }
 
 }
