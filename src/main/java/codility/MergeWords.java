@@ -1,7 +1,6 @@
 package codility;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 public class MergeWords {
 
@@ -28,7 +27,7 @@ public class MergeWords {
         System.out.println(mw.mergeWords("axxz", "yzwy")); //yxxy
     }
 
-    String mergeWords(String p, String q) {
+    int mergeWords(String p, String q) {
         Map<Character, Integer> charsStats = calculateCharsNumber(p + q, new TreeMap<>());
         System.out.println(charsStats);
         List<Character> result = new LinkedList<>();
@@ -42,8 +41,8 @@ public class MergeWords {
             else
                 result.add(qChar);
         }
-        System.out.println(result.stream().distinct().count());
-        return result.toString();
+        System.out.println(result);
+        return Long.valueOf(result.stream().distinct().count()).intValue();
     }
 
     private Map<Character, Integer> calculateCharsNumber(String line, Map<Character, Integer> charsStats) {
@@ -56,9 +55,4 @@ public class MergeWords {
             return calculateCharsNumber(newLine, charsStats);
         }
     }
-
-}
-
-interface CalculateNumber {
-    int calculateCharsNum(Character ch, String s);
 }

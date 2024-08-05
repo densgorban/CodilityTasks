@@ -1,4 +1,4 @@
-package tasks;
+package tasks.lambda;
 
 import java.util.*;
 import java.util.function.Predicate;
