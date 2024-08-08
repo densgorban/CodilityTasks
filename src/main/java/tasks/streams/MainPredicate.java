@@ -3,9 +3,8 @@ package tasks.streams;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
-public class StudentsForumMain {
+public class MainPredicate {
 
     public static void main(String[] args) {
         Predicate<Student> nameFilter = s -> s.getName().startsWith("Boris");
