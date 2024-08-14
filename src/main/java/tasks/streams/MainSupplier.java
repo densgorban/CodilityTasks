@@ -3,9 +3,7 @@ package tasks.streams;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
@@ -15,7 +13,7 @@ public class MainSupplier {
         Instant start = Instant.now();
         List<Student> result = heavyOperation.get();
         Instant end = Instant.now();
-        System.out.println("Duration: " + Duration.between(start,end));
+        System.out.println("Duration: " + Duration.between(start, end).toMillis());
         return result;
     }
 
