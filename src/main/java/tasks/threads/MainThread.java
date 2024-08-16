@@ -4,13 +4,25 @@ import java.util.function.Supplier;
 
 public class MainThread {
 
-    public static void main(String[] args) {
+
+
+    public static void main(String[] args) throws InterruptedException {
 
         Thread th1 = new MyThread(0, Type.INCREMENT, 1000);
         Thread th2 = new MyThread(1000, Type.DECREMENT, 0);
-        System.out.println("Main thread name: " + Thread.currentThread().getName());
+        Thread th3 = new Thread(() -> {
+            for (int i = 0; i < 1000; i++) {
+                System.out.println(Thread.currentThread().getName() + ": " + i);
+            }
+        });
+
         th1.start();
         th2.start();
+        th3.start();
+        th1.join();
+        th2.join();
+        th3.join();
+        System.out.println( Thread.currentThread().getName() + " has been completed");
     }
 
 }
@@ -44,5 +56,5 @@ class MyThread extends Thread {
 }
 
 enum Type {
-    INCREMENT, DECREMENT;
+    INCREMENT, DECREMENT
 }
