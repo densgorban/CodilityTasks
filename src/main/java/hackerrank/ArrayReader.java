@@ -9,7 +9,6 @@ public class ArrayReader {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String line = scanner.nextLine();
-//        System.out.println(line);
         int n = Integer.parseInt(line);
         int[] a = new int[n];
         IntStream.rangeClosed(0, n - 1).forEach(i -> {
