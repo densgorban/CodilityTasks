@@ -24,8 +24,6 @@ public class MainThreadInterrupt {
         Thread.sleep(2000);
 
         myInterruptedThread.interrupt();
-
-
     }
 
 }

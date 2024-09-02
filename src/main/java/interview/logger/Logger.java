@@ -1,27 +1,33 @@
 package interview.logger;
 
 import java.time.Instant;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import static java.lang.Thread.sleep;
 
-public class Logger {
+public class Logger implements AutoCloseable {
 
     private volatile boolean stopFlag = false;
+
+    ConcurrentMap<String, Queue<String>> storage = new ConcurrentHashMap<>();
     private BlockingQueue<String> queue = new ArrayBlockingQueue<String>(100, true);
 
     private static Logger logger;
 
     public static Logger logger() {
-        if(logger == null)
+        if (logger == null)
             logger = new Logger();
         return logger;
     }
 
     private Logger() {
-        Thread worker = new Thread( () -> {
-            while(!stopFlag) {
+        Thread worker = new Thread(() -> {
+            while (!stopFlag) {
                 try {
                     do {
                         String message = queue.take();
@@ -33,7 +39,7 @@ public class Logger {
                 }
             }
         });
-        worker.setName("logger");
+        worker.setName("custom_logger");
         worker.start();
     }
 
@@ -42,15 +48,12 @@ public class Logger {
     }
 
     public synchronized void logMessage(String fileName, String message, String level) {
-        String string = Instant.now().toString();
-        String formattedLog = "[" + string + "] " +
-                "[" + level + "] " +
-                message;
-        try {
-            queue.put(formattedLog);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        storage.putIfAbsent(fileName, new LinkedList<>());
+        storage.get(fileName).add(String.format("[%s][%s] %s", Instant.now().toString(), level, message));
     }
 
+    @Override
+    public void close() throws Exception {
+
+    }
 }
